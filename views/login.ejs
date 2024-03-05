@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= client %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/styles/logopane.css" rel="stylesheet">
+    <link href="/styles/loginpane.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid main-window pt-5 pt-md-0">
+        <div class="row main-row">
+            <div class="col-12 col-md-7 logo-pane d-flex align-items-center justify-content-center">
+                <div class="circle-container m-4">
+                    <div class="out-circle cir-out">
+                        <div class="in-circle cir-1">
+                            <div class="out-circle cir-2">
+                                <div class="in-circle cir-1">
+                                    <div class="out-circle cir-2">
+                                        <div class="in-circle cir-1">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center logo-box py-md-4 px-md-5">LOGO</div>
+            </div>
+
+            <div class="col-12 col-md-5 login-pane d-flex align-items-center justify-content-center">
+                <form class="w-100 pt-5" action="<%= path %>" method="post">
+                    <p class="text-center m-0 desc-head">
+                        <%= client %> Login
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <div class="px-2 px-md-4 pt-5 login-container flex-fill">
+                            <input type="text" placeholder="User ID" class="form-control p-3 my-3" name="username">
+                            <input type="password" placeholder="Password" class="form-control p-3 my-3" name="password">
+                            <button type="submit" class="btn btn-primary w-100 p-3 my-4">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

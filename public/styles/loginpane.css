@@ -1,0 +1,47 @@
+.login-container {
+    max-width: 570px;
+}
+
+.login-pane {
+    background-color: #FFFFFF;
+}
+
+.user-field-container {
+    background-color: #EAECFF;
+}
+
+.view-button {
+    max-width: 200px;
+}
+
+.users-input-container {
+    max-width: 600px;
+}
+
+.corner-dot {
+    width: 30px;
+    height: 30px;
+    color: #FFFFFF;
+}
+
+.desc-head {
+    color: #646464;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.main-window {
+    background-color: #F4F4F4;
+}
+
+@media screen and (min-width: 768px) {
+    .main-row {
+        height: 100vh;
+        width: 100vw;
+    }
+    
+}

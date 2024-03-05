@@ -1,0 +1,50 @@
+body {
+    background-color: #F4F4F4;
+}
+
+.main-window {
+    background-color: #EDEBEB;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.table-cell {
+    color: #5C5C5C;
+    align-items: center;
+    justify-content: center;
+}
+
+.head-row, .person-info {
+    background-color: #EAECFF;
+    border: 0.8px solid black;
+}
+
+.person-values {
+    background-color: #FFFFFF;
+}
+
+.head-row {
+    height: 70px;
+}
+
+.user-image {
+    width: 60px;
+}
+
+@media screen and (min-width: 768px) {
+    body, .main-window, .person-info, .person-values {
+        background-color: inherit;
+    }
+
+    .table-cell {
+        font-weight: 500;
+        border: 0.8px solid black;
+    }
+
+    .user-image {
+        width: 100px;
+    }
+}
