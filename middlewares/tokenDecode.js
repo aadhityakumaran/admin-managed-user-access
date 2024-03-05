@@ -5,7 +5,7 @@ function tokenDecode(req, res, next) {
     if (token) {
         try {
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
-            req.user = decoded;
+            req.token = decoded;
         } catch (err) {
             console.error(err);
         }

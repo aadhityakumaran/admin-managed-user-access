@@ -9,6 +9,24 @@ const PUBLIC_PATH = path.resolve(__dirname, '../../public')
 
 const router = express.Router();
 
+const sendResponse = (res, done, successMessage, errorMessage) => {
+    if (done.acknowledged) {
+        res.status(200).json({ message: successMessage });
+    } else {
+        res.status(500).json({ message: errorMessage });
+    }
+}
+
+const deleteFile = (filePath) => {
+    if (fs.existsSync(filePath)) {
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error(err);
+            }
+        });
+    }
+}
+
 router.get('/', async (req, res) => {
     const { u1, u2 } = req.query;
     try {
@@ -58,12 +76,8 @@ router.put('/:id', async (req, res) => {
             if (err) {
                 console.error(err);
             }
-        })
-        if (done.acknowledged) {
-            res.status(200).json({ message: 'User deleted' });
-        } else {
-            res.status(500).json({ message: 'Could not update user' });
-        }
+        });
+        sendResponse(res, done, "User deleted", "Could not update user");
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error' });
@@ -72,24 +86,28 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
-    try {
-        const filePath = path.join(PUBLIC_PATH, '/uploads', `${id}.png`);
-        if (fs.existsSync(filePath)) {
-            fs.unlink(filePath, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
+    const user = await User.findOne({ _id: id });
+    console.log(user.update)
+    if (user.update) {
+        try {
+            const done = await User.updateOne({ _id: id }, { update: false });
+            const filePath = path.join(PUBLIC_PATH, '/uploads', `${id}new.png`);
+            deleteFile(filePath);
+            sendResponse(res, done, "User updated", "Could not update user");
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Server error' });
         }
-        const done = await User.deleteOne({ _id: id });
-        if (done.acknowledged) {
-            res.status(200).json({ message: 'User deleted' });
-        } else {
-            res.status(500).json({ message: 'Could not delete user' });
+    } else {
+        try {
+            const filePath = path.join(PUBLIC_PATH, '/uploads', `${id}.png`);
+            const done = await User.deleteOne({ _id: id });
+            deleteFile(filePath);
+            sendResponse(res, done, "User deleted", "Could not delete user")
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Server error' });
         }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
     }
 })
 
