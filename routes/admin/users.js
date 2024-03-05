@@ -87,7 +87,6 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     const user = await User.findOne({ _id: id });
-    console.log(user.update)
     if (user.update) {
         try {
             const done = await User.updateOne({ _id: id }, { update: false });

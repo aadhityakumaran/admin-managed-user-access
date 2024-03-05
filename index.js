@@ -2,6 +2,7 @@ import express from 'express';
 import env from "dotenv";
 import cookieParser from 'cookie-parser';
 import adminRoutes from './routes/admin/index.js';
+import userRoutes from './routes/user/index.js';
 import connectDB from './db.js';
 import tokenDecode from './middlewares/tokenDecode.js';
 
@@ -18,13 +19,10 @@ app.use(tokenDecode);
 
 app.use(express.static('public'));
 app.use('/admin', adminRoutes);
-
-app.get('/', (req, res) => {
-    res.render("login.ejs", { client: "User", path: "home" });
-});
+app.use(userRoutes);
 
 app.use((req, res) => {
-    res.status(404).json({ message: "Page not found"})
+    res.status(404).json({ message: "Page not found"});
 });
 
 app.use((err, req, res, next) => {
