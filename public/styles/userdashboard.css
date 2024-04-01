@@ -11,7 +11,7 @@ body {
     flex: 1;
 }
 
-.image-activity {
+.image-container {
     height: 250px;
     width: 250px;
 }
@@ -61,7 +61,7 @@ img {
 }
 
 @media screen and (min-width: 576px) {
-    .image-activity {
+    .image-container {
         height: 350px;
         width: 350px;
     }

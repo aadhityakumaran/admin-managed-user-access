@@ -4,14 +4,15 @@ import jwt from 'jsonwebtoken';
 import Admin from "../../models/admin.js";
 
 const router = express.Router();
+router.basePath = "/admin";
 
 const redirectToLogin = (req, res) => {
     res.cookie("redirectTo", req.originalUrl, { httpOnly: true });
-    res.redirect("/admin/login");
+    res.redirect(router.basePath + "/login");
 }
 
 router.use((req, res, next) => {
-    if (req.originalUrl === "/admin/login" || req.originalUrl === "/admin/auth") {
+    if (req.originalUrl === router.basePath + '/login') {
         return next();
     }
     const token = req.token;
@@ -29,10 +30,10 @@ router.use((req, res, next) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render("login.ejs", { client: "Admin", path: "/admin/auth" });
+    res.render("login.ejs", { client: "Admin", path: router.basePath + "/login" });
 });
 
-router.post('/auth', async (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     let admin;
     try {
@@ -58,18 +59,18 @@ router.post('/auth', async (req, res) => {
 
     const token = jwt.sign({ username: admin.user, client: "admin" }, process.env.SECRET_KEY);
     const redirect = req.cookies.redirectTo;
-    res.cookie("token", token);
+    res.cookie("token", token, { httpOnly: true });
     if (redirect) {
         res.clearCookie("redirectTo");
         res.redirect(redirect);
     } else {
-        res.redirect("/admin");
+        res.redirect(router.basePath);
     }
 });
 
 router.get('/logout', (req, res) => {
     res.clearCookie("token");
-    res.redirect("/admin/login");
+    res.redirect(router.basePath + "/login");
 });
 
 export default router;
