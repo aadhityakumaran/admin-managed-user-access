@@ -1,14 +1,19 @@
-.main-window {
+body {
+    background-color: #F4F4F4;
     height: 100vh;
+}
+
+.main-window {
+    height: 100%;
 }
 
 .form-container {
     flex: 1;
 }
 
-#image-activity {
-    height: 350px;
-    width: 350px;
+.image-activity {
+    height: 250px;
+    width: 250px;
 }
 
 #drop-area {
@@ -27,4 +32,42 @@
 
 img {
     max-width: 100%;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 100;
+}
+
+#view-window {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 576px;
+    z-index: 101;
+    display: none;
+}
+
+#view-window.show {
+    display: block;
+}
+
+@media screen and (min-width: 576px) {
+    .image-activity {
+        height: 350px;
+        width: 350px;
+    }
+
+    #overlay.show {
+        display: block;
+    }
+    
 }
