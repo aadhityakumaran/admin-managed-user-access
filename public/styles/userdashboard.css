@@ -5,3 +5,26 @@
 .form-container {
     flex: 1;
 }
+
+#image-activity {
+    height: 350px;
+    width: 350px;
+}
+
+#drop-area {
+    height: 100%;
+    background-color: #EEEEEE;
+    border: 2px dashed #CDCDCD;
+}
+
+#photoInput {
+    display: none;
+}
+
+#drop-area.highlight {
+    border-color: #2196F3;
+}
+
+img {
+    max-width: 100%;
+}

@@ -8,4 +8,9 @@ router.get('/', (req, res) => {
     res.render("userdashboard.ejs");
 });
 
+router.post('/', (req, res) => {
+    console.log(req.body);
+    res.send('ok');
+});
+
 export default router;
