@@ -1,7 +1,10 @@
 const imageActivity = document.getElementById('image-activity');
 const submitButton = document.getElementById('submit-button');
 const nameInput = document.getElementById('name');
-const viewButton = document.getElementById('view-button');
+const viewButtons = document.getElementsByClassName('view-button');
+const overlay = document.getElementById('overlay');
+const viewWindow = document.getElementById('view-window');
+
 let imageDataURL = null;
 
 function highlight(event) {
@@ -82,9 +85,17 @@ async function handleSubmit() {
             body: formData
         });
         if (res.ok) {
-            alert('Image uploaded successfully');
+            alert('Data uploaded successfully');
         }
     } catch (error) {
         console.error(error);
+    }
+    window.location.reload(true);
+}
+
+for (const button of viewButtons) {
+    button.onclick = () => {
+        overlay.classList.toggle('show');
+        viewWindow.classList.toggle('hide');
     }
 }

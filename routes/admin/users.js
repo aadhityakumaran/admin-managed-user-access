@@ -3,11 +3,13 @@ import User from "../../models/user.js";
 import fs from "fs";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import multer from "multer";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_PATH = path.resolve(__dirname, '../../public')
 
 const router = express.Router();
+const upload = multer();
 
 const sendResponse = (res, done, successMessage, errorMessage) => {
     if (done.acknowledged) {
@@ -49,7 +51,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', upload.none(),  async (req, res) => {
     const { username, password } = req.body;
     const newUser = new User({
         _id: username,

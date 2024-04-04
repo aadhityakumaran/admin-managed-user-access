@@ -1,6 +1,7 @@
 body {
     background-color: #F4F4F4;
     height: 100vh;
+    overflow-x: hidden;
 }
 
 .main-window {
@@ -31,7 +32,8 @@ body {
 }
 
 img {
-    max-width: 100%;
+    width: 100%;
+    border-radius: 3%;
 }
 
 #overlay {
@@ -53,11 +55,22 @@ img {
     width: 100%;
     max-width: 576px;
     z-index: 101;
-    display: none;
+    transform: translate(0);
+    transition: transform 0.5s ease-out;
+    display: flex
 }
 
-#view-window.show {
-    display: block;
+#view-window.hide {
+    transform: translate(100%);
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.approved {
+    font-size: 1.7rem;
+    text-align: center
 }
 
 @media screen and (min-width: 576px) {
