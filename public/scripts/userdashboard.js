@@ -72,13 +72,13 @@ async function handleSubmit() {
     const formData = new FormData();
     formData.append('name', nameInput.value);
     if (imageDataURL) {
-        const type = imageDataURL.split(';')[0].split('/')[1];
+        const type = imageDataURL.split(';')[0].split(':')[1];
         
         const res = await fetch(imageDataURL);
         const blob = await res.blob();
-        formData.append('image', blob, `image.${type}`);
+        const file = new File([blob], `file`, { type: type });
+        formData.append('image', file);
     }
-    console.log(formData.get('name'));
     try {
         const res = await fetch('/', {
             method: 'POST',

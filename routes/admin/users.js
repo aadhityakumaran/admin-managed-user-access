@@ -35,9 +35,9 @@ router.get('/', async (req, res) => {
         const users = await User.find({ _id: { $in: [u1, u2] } });
         const updatedUsers = users.map(user => {
             const files = [
-                `/uploads/${user._id}new.png`,
-                `/uploads/${user._id}.png`,
-                `/images/unknown.png`
+                `/uploads/${user._id}new.webp`,
+                `/uploads/${user._id}.webp`,
+                `/images/unknown.webp`
             ];
             const img = files.find((file) => {
                 return fs.existsSync(path.join(PUBLIC_PATH, file));
@@ -74,7 +74,7 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const done = await User.updateOne({ _id: id }, { update: false });
-        fs.rename(path.join(PUBLIC_PATH, `/uploads/${id}new.png`), path.join(PUBLIC_PATH, `/uploads/${id}.png`), (err) => {
+        fs.rename(path.join(PUBLIC_PATH, `/uploads/${id}new.webp`), path.join(PUBLIC_PATH, `/uploads/${id}.webp`), (err) => {
             if (err) {
                 console.error(err);
             }
@@ -92,7 +92,7 @@ router.delete('/:id', async (req, res) => {
     if (user.update) {
         try {
             const done = await User.updateOne({ _id: id }, { update: false });
-            const filePath = path.join(PUBLIC_PATH, '/uploads', `${id}new.png`);
+            const filePath = path.join(PUBLIC_PATH, '/uploads', `${id}new.webp`);
             deleteFile(filePath);
             sendResponse(res, done, "User updated", "Could not update user");
         } catch (err) {
@@ -101,7 +101,7 @@ router.delete('/:id', async (req, res) => {
         }
     } else {
         try {
-            const filePath = path.join(PUBLIC_PATH, '/uploads', `${id}.png`);
+            const filePath = path.join(PUBLIC_PATH, '/uploads', `${id}.webp`);
             const done = await User.deleteOne({ _id: id });
             deleteFile(filePath);
             sendResponse(res, done, "User deleted", "Could not delete user")
