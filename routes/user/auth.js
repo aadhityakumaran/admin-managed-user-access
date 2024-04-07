@@ -10,24 +10,6 @@ const redirectToLogin = (req, res) => {
     res.redirect('/login');
 }
 
-router.use((req, res, next) => {
-    if (req.originalUrl === '/login') {
-        return next();
-    }
-    const token = req.token;
-    if (!token) {
-        return redirectToLogin(req, res);
-    }
-    try {
-        if (token.client !== "user") {
-            return redirectToLogin(req, res);
-        }
-        next();
-    } catch (err) {
-        return redirectToLogin(req, res);
-    }
-});
-
 router.get('/login', (req, res) => {
     res.render("login.ejs", { client: "User", path: "/login" });
 });
@@ -57,13 +39,34 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign({ userID: user._id, client: "user" }, process.env.SECRET_KEY);
+    const redirect = req.cookies.redirectTo;
     res.cookie("token", token, { httpOnly: true });
-    res.redirect("/");
+    if (redirect) {
+        res.clearCookie("redirectTo");
+        res.redirect(redirect);
+    } else {
+        res.redirect("/");
+    }
 });
 
 router.get('/logout', (req, res) => {
     res.clearCookie("token");
     res.redirect("/");
+});
+
+router.use((req, res, next) => {
+    const token = req.token;
+    if (!token) {
+        return redirectToLogin(req, res);
+    }
+    try {
+        if (token.client !== "user") {
+            return redirectToLogin(req, res);
+        }
+        next();
+    } catch (err) {
+        return redirectToLogin(req, res);
+    }
 });
 
 export default router;

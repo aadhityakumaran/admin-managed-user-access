@@ -11,24 +11,6 @@ const redirectToLogin = (req, res) => {
     res.redirect(router.basePath + "/login");
 }
 
-router.use((req, res, next) => {
-    if (req.originalUrl === router.basePath + '/login') {
-        return next();
-    }
-    const token = req.token;
-    if (!token) {
-        return redirectToLogin(req, res);
-    }
-    try {
-        if (token.client !== "admin") {
-            return redirectToLogin(req, res);
-        }
-        next();
-    } catch (err) {
-        return redirectToLogin(req, res);
-    }
-});
-
 router.get('/login', (req, res) => {
     res.render("login.ejs", { client: "Admin", path: router.basePath + "/login" });
 });
@@ -71,6 +53,21 @@ router.post('/login', async (req, res) => {
 router.get('/logout', (req, res) => {
     res.clearCookie("token");
     res.redirect(router.basePath + "/login");
+});
+
+router.use((req, res, next) => {
+    const token = req.token;
+    if (!token) {
+        return redirectToLogin(req, res);
+    }
+    try {
+        if (token.client !== "admin") {
+            return redirectToLogin(req, res);
+        }
+        next();
+    } catch (err) {
+        return redirectToLogin(req, res);
+    }
 });
 
 export default router;
