@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ username: admin.user, client: "admin" }, process.env.SECRET_KEY);
+    const token = jwt.sign({ username: admin.user, client: "Admin" }, process.env.SECRET_KEY);
     const redirect = req.cookies.redirectTo;
     res.cookie("token", token, { httpOnly: true });
     if (redirect) {
@@ -61,7 +61,7 @@ router.use((req, res, next) => {
         return redirectToLogin(req, res);
     }
     try {
-        if (token.client !== "admin") {
+        if (token.client !== "Admin") {
             return redirectToLogin(req, res);
         }
         next();
