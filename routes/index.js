@@ -8,7 +8,7 @@ import multer from 'multer';
 import sharp from 'sharp';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const PUBLIC_PATH = path.resolve(__dirname, '../../public');
+const PUBLIC_PATH = path.resolve(__dirname, '../public');
 
 const router = express.Router();
 router.use(auth("User", "/"));
@@ -50,7 +50,6 @@ router.post('/', multer({ storage: multer.memoryStorage() }).single('image'), as
             if (!req.file.mimetype.startsWith('image/')) {
                 return res.status(415).json({ message: "Invalid file type" });
             }
-
             const fileName = path.join(PUBLIC_PATH, 'uploads', `${user._id}new.webp`);
             let buffer = req.file.buffer;
 
