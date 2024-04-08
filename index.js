@@ -1,8 +1,8 @@
 import express from 'express';
 import env from "dotenv";
 import cookieParser from 'cookie-parser';
-import adminRoutes from './routes/admin/index.js';
-import userRoutes from './routes/user/index.js';
+import adminRoutes from './routes/admin.js';
+import userRoutes from './routes/index.js';
 import connectDB from './db.js';
 import tokenDecode from './middlewares/tokenDecode.js';
 

@@ -1,18 +1,17 @@
 import express from 'express';
 import auth from './auth.js';
-import User from '../../models/user.js';
+import User from '../models/user.js';
 import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import multer from 'multer';
 import sharp from 'sharp';
-import { log } from 'console';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_PATH = path.resolve(__dirname, '../../public');
 
 const router = express.Router();
-router.use(auth);
+router.use(auth("User", "/"));
 
 router.get('/', async (req, res) => {
     const user = await User.findOne({ _id: req.token.userID });
