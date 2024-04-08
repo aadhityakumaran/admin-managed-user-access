@@ -19,9 +19,9 @@
                     <div class="d-flex justify-content-center">
                         <div class="px-2 px-md-4 pt-3 pt-md-4 login-container flex-fill">
                             <label for="user-id" class="form-label mt-md-3">User ID</label>
-                            <input type="text" id="user-id" class="form-control p-3" name="username">
+                            <input type="text" id="user-id" class="form-control p-3" name="username" pattern="\d{4}" title="4-digit number" required>
                             <label for="password" class="form-label mt-3">Password</label>
-                            <input type="password" id="password" class="form-control p-3 mb-md-3" name="password">
+                            <input type="password" id="password" class="form-control p-3 mb-md-3" name="password" required>
                             <button type="submit" class="btn btn-primary w-100 p-3 my-4">Submit</button>
                         </div>
                     </div>
@@ -37,13 +37,13 @@
                                 <div
                                     class="position-absolute top-0 end-0 bg-primary corner-dot rounded-circle d-flex justify-content-center align-items-center">
                                     1</div>
-                                <input type="text" id="user1" class="form-control p-2" name="u1">
+                                <input type="text" id="user1" class="form-control p-2" name="u1" pattern="\d{4}" title="4-digit number">
                             </div>
                             <div class="mb-3 p-5 user-field-container position-relative">
                                 <div
                                     class="position-absolute top-0 end-0 bg-primary corner-dot rounded-circle d-flex justify-content-center align-items-center">
                                     2</div>
-                                <input type="text" id="user2" class="form-control p-2" name="u2">
+                                <input type="text" id="user2" class="form-control p-2" name="u2" pattern="\d{4}" title="4-digit number">
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary view-button w-100 p-3 my-2">View</button>

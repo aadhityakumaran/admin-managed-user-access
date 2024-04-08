@@ -41,8 +41,12 @@
                     </p>
                     <div class="d-flex justify-content-center">
                         <div class="px-2 px-md-4 pt-5 login-container flex-fill">
-                            <input type="text" placeholder="User ID" class="form-control p-3 my-3" name="username">
-                            <input type="password" placeholder="Password" class="form-control p-3 my-3" name="password">
+                            <% if (client === "User") {%>
+                                <input type="text" placeholder="User ID" class="form-control p-3 my-3" name="username" pattern="\d{4}" title="4-digit number" required>
+                            <% } else { %>
+                                <input type="text" placeholder="Admin Name" class="form-control p-3 my-3" name="username" required>
+                            <% } %>
+                            <input type="password" placeholder="Password" class="form-control p-3 my-3" name="password" required>
                             <button type="submit" class="btn btn-primary w-100 p-3 my-4">Login</button>
                         </div>
                     </div>
