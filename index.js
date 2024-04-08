@@ -5,6 +5,7 @@ import adminRoutes from './routes/admin.js';
 import userRoutes from './routes/index.js';
 import connectDB from './db.js';
 import tokenDecode from './middlewares/tokenDecode.js';
+import uploadsAuth from './middlewares/uploadsAuth.js';
 
 
 const app = express();
@@ -15,9 +16,12 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(tokenDecode);
 
+app.use('/uploads/:image', uploadsAuth)
 app.use(express.static('public'));
+
 app.use('/admin', adminRoutes);
 app.use(userRoutes);
 

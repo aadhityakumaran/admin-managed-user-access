@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-function tokenDecode(req, res, next) {
+export default function (req, res, next) {
     const token = req.cookies.token;
     if (token) {
         try {
@@ -12,5 +12,3 @@ function tokenDecode(req, res, next) {
     }
     next()
 }
-
-export default tokenDecode;

@@ -52,12 +52,7 @@ export default function(client, basePath) {
             return res.status(401).json({ message: "Invalid password" });
         }
 
-        let token;
-        if (client === "Admin") {
-            token = jwt.sign({ username, client }, process.env.SECRET_KEY);
-        } else {
-            token = jwt.sign({ userID: username, client }, process.env.SECRET_KEY);
-        }
+        const token = jwt.sign({ userID: username, client }, process.env.SECRET_KEY);
         
         const redirect = req.cookies.redirectTo;
         res.cookie("token", token, { httpOnly: true });
