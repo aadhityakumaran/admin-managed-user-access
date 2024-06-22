@@ -6,11 +6,11 @@ import userRoutes from './routes/index.js';
 import connectDB from './db.js';
 import tokenDecode from './middlewares/tokenDecode.js';
 import uploadsAuth from './middlewares/uploadsAuth.js';
-
+env.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-env.config();
+
 connectDB();
 
 app.use(express.urlencoded({ extended: true }));
